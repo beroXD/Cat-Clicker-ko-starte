@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cat Clicker</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+	<!--
+   Knockout does not need the ids, it just need data bindings attributes on them.
+   The bindings are what connect the view and the modle.
+   that is why we removed the ids, and it is not necessary.
+   
+   <ul></ul>
+-->
+	<ul data-bind="foreach: catList">
+		<li data-bind="text: name, click: $parent.setCat"></li>
+	</ul>
+	<div data-bind="with: currentCat">
+
+		<!-- if the observable would ever change we will change the bindings also   -->
+		<!-- adding currentCat() cuz the cat in now living in the currentCat observable-->
+		<!-- we want the name her-->
+		<h2 data-bind="text: name"></h2>
+		<h3 data-bind="text: level"></h3>
+		<!-- here is the clickCount -->
+		<div data-bind="text: clickCount"></div>
+
+		<!-- we have 2 things here, when we click the counter will increment. and we also want the src of the pic. -->
+		<img src="" alt="cute cat" data-bind="click: $parent.incrementCounter, attr: {src: imgSrc}">
+		<!-- use $parent to get out of scop of currentCat-->
+
+		<!-- view for nested array -->
+
+		<ul data-bind="foreach: nickNames">
+			<li data-bind="text: catname"></li>
+			<ul data-bind="foreach: nickname">
+				<li data-bind="text: $data"></li>
+				<!--to get to the data in nested array-->
+			</ul>
+		</ul>
+
+	</div>
+	<script src="js/lib/knockout-3.2.0.js"></script>
+	<script src="js/app.js"></script>
+</body>
+
+</html>
